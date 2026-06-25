@@ -71,3 +71,4 @@ function DecoderInput({ setHistory, onDecode }: DecoderInputProps) {
   );
 }
 export default DecoderInput;
+  
