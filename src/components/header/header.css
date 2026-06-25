@@ -10,7 +10,7 @@ header {
   border-bottom: 1px solid #e5e7eb;
 }
 
-header h1 {
+.logo {
   font-size: 24px;
   font-weight: 700;
 }

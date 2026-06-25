@@ -6,47 +6,34 @@
 
 .variables-box {
   background: white;
-
   padding: 24px;
-
   border-radius: 12px;
-
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .variables-box h2 {
   margin-bottom: 20px;
-
   font-size: 24px;
-
   font-weight: 700;
 }
 
 .variables-list {
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
 }
 
 .variable-item {
   padding: 14px 18px;
-
   border: 1px solid #e5e7eb;
-
   border-radius: 8px;
-
   transition: 0.2s;
-
   cursor: pointer;
-
   background: #fff;
 }
 
 .variable-item:hover {
   background: #f8fafc;
-
   border-color: #2563eb;
 }
 
@@ -61,7 +48,7 @@
   color: #4b5563;
   line-height: 1.5;
 }
-.variable-item div{
-    display: flex;
-    justify-content: space-between;
+.variable-item div {
+  display: flex;
+  justify-content: space-between;
 }

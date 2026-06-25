@@ -1,11 +1,8 @@
 .results-box {
   background: white;
-
   padding: 20px;
-
   border-radius: 12px;
-
-  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .results-box h2 {
@@ -14,22 +11,29 @@
 
 .results-table {
   width: 100%;
-
   border-collapse: collapse;
 }
 
 .results-table th {
   background: #f8fafc;
-
   text-align: left;
-
   padding: 12px;
-
   border-bottom: 1px solid #e5e7eb;
 }
 
 .results-table td {
   padding: 12px;
-
   border-bottom: 1px solid #e5e7eb;
+}
+
+.api-message {
+  margin-bottom: 15px;
+  padding: 10px;
+
+  border-radius: 8px;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  font-size: 14px;
 }

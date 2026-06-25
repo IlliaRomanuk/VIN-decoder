@@ -1,21 +1,21 @@
-import DecoderInput from "../decoderInput/decoderInput";
-import DecoderHistory from "../decoderHistory/decoderHistory";
-import type { Result } from "../../type/result.type";
-import type { Dispatch, SetStateAction } from "react";
-import './aside.css'
+import DecoderInput from "../DecoderInput/DecoderInput";
+import DecoderHistory from "../DecoderHistory/DecoderHistory";
 
+import "./Aside.css";
 type AsideProps = {
-  setResults: Dispatch<SetStateAction<Result[]>>;
   history: string[];
   setHistory: React.Dispatch<React.SetStateAction<string[]>>;
+  onDecode: (vin: string) => void;
 };
 
-function Aside({setResults, history, setHistory}: AsideProps) {
-    return(
-        <>
-        <DecoderInput setResults={setResults}  setHistory={setHistory} /> 
-        <DecoderHistory history={history} setResults={setResults} />
-        </>   
-    )
+function Aside({ history, setHistory, onDecode }: AsideProps) {
+
+  return (
+    <>
+      <DecoderInput setHistory={setHistory} onDecode={onDecode} />
+      <DecoderHistory history={history} onDecode={onDecode} />
+    </>
+  );
 }
+
 export default Aside;

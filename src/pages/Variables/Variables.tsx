@@ -1,31 +1,25 @@
-import { useEffect, useState } from "react";
-import Header from "../../components/header/header";
 import { getvehiclevariablelist } from "../../services/api";
 import { Link } from "react-router-dom";
-import type { Variable } from "../../type/variable.type";
 import "./Varibles.css";
+import { useQuery } from "@tanstack/react-query";
 
 function Variables() {
-  const [list, setList] = useState<Variable[]>([]);
-  useEffect(() => {
-    getvehiclevariablelist()
-      .then((data) => {
-        setList(data.Results);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["variables"],
+    queryFn: getvehiclevariablelist,
+  });
+
+  if (isLoading) return <p>Loading variables</p>;
+
+  if (error) return <p>Error variables</p>;
 
   return (
     <>
-      <Header />
-
       <div className="variables-page">
         <div className="variables-box">
           <h2>Vehicle Variables</h2>
           <ul className="variables-list">
-            {list?.map((variable) => (
+            {data?.Results.map((variable) => (
               <li key={variable.ID} className="variable-item">
                 <Link
                   key={variable.ID}
@@ -36,7 +30,12 @@ function Variables() {
                     <h3>{variable.Name}</h3>
                     <p>ID: {variable.ID}</p>
                   </div>
-                  <p>{variable.Description}</p>
+                  <div
+                    className="details-description"
+                    dangerouslySetInnerHTML={{
+                      __html: variable.Description,
+                    }}
+                  />
                 </Link>
               </li>
             ))}

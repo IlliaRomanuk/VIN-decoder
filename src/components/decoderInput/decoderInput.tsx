@@ -1,81 +1,73 @@
 import "./decoderInput.css";
 import { useState } from "react";
 import { decodeVin } from "../../services/api";
-import type { Result } from "../../type/result.type";
 import type { Dispatch, SetStateAction } from "react";
+import type { DecodeVinResponse } from "../../type/api.type";
+import { useMutation } from "@tanstack/react-query";
 
 type DecoderInputProps = {
-  setResults: Dispatch<SetStateAction<Result[]>>;
-    setHistory: React.Dispatch<React.SetStateAction<string[]>>;
+  setHistory: Dispatch<SetStateAction<string[]>>;
+  onDecode: (vin: string) => void;
 };
 
-function DecoderInput({setResults, setHistory}: DecoderInputProps) {
+function DecoderInput({ setHistory, onDecode }: DecoderInputProps) {
   const [vin, setVin] = useState("");
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const mutation = useMutation<DecodeVinResponse, Error, string>({
+    mutationKey: ["decodeVin"],
+    mutationFn: decodeVin,
+  });
 
   const validateVin = (vin: string) => {
-    if (!vin.trim()) {
-      return "VIN не може бути порожнім";
-    }
+    const normalizedVin = vin.trim().toUpperCase();
 
-    if (vin.length > 17) {
-      return "VIN не може бути довшим за 17 символів";
-    }
+    if (!normalizedVin) return "VIN не може бути порожнім";
+    if (normalizedVin.length !== 17) return "VIN має містити рівно 17 символів";
 
     const vinRegex = /^[A-HJ-NPR-Z0-9]+$/;
-
-    if (!vinRegex.test(vin)) {
-      return "VIN містить заборонені символи";
-    }
+    if (!vinRegex.test(normalizedVin)) return "VIN містить заборонені символи";
 
     return "";
   };
 
   const handleDecode = async () => {
-    const validationError = validateVin(vin);
+    const normalizedVin = vin.trim().toUpperCase();
+    const validationError = validateVin(normalizedVin);
 
     if (validationError) {
       setError(validationError);
       return;
     }
 
-    try {
-      setLoading(true);
-      setError("");
+    setError("");
 
-      const data = await decodeVin(vin);
-
-      setResults(
-        data.Results.filter((item: Result) => item.Value && String(item.Value).trim() !== ""),
-      );
-      setHistory(
-        prev => [...prev, vin]
-      );
-    } catch {
-      setError("Помилка при отриманні даних");
-    } finally {
-      setLoading(false);
-    }
+    await onDecode(normalizedVin);
+    setHistory((prev) => {
+      const filtered = prev.filter((v) => v !== vin);
+      return [vin, ...filtered].slice(0, 3);
+    });
   };
 
   return (
     <div className="decoder-box">
       <h2>Decode VIN</h2>
+
       <input
         className="decoder-input"
         value={vin}
         onChange={(e) => setVin(e.target.value.toUpperCase())}
         maxLength={17}
-        type="text"
         placeholder="Enter VIN"
       />
-      {error && <p className="error-message">{error}</p>}
-      <button onClick={handleDecode} className="decoderButton">
-        {loading ? "Loading..." : "Decode"}
+
+      <button onClick={handleDecode} className="decoderButton" disabled={mutation.isPending}>
+        {mutation.isPending ? "Loading..." : "Decode"}
       </button>
+
+      {error && <p className="error-message">{error}</p>}
+      {mutation.error && <p className="error-message">{mutation.error.message}</p>}
     </div>
   );
 }
-
 export default DecoderInput;

@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../../components/header/header";
 import { getvehiclevariablelist } from "../../services/api";
 import type { Variable } from "../../type/variable.type";
-import "./VariableDetails.css"
+import "./VariableDetails.css";
 function VariableDetails() {
   const { id } = useParams();
   const [variable, setVariable] = useState<Variable | null>(null);
 
   useEffect(() => {
     getvehiclevariablelist().then((data) => {
-      const found = data.Results.find(
-        (item: Variable) => item.ID === Number(id),
-      );
+      const found = data.Results.find((item: Variable) => item.ID === Number(id));
       setVariable(found || null);
     });
   }, [id]);
@@ -21,7 +18,6 @@ function VariableDetails() {
 
   return (
     <>
-      <Header />
       <div className="details-page">
         <div className="details-box">
           <div className="details-header">
@@ -29,8 +25,13 @@ function VariableDetails() {
             <span className="details-id">ID: {variable.ID}</span>
           </div>
           <div className="details-description">
-        <p>{variable.Description}</p>
-        </div>
+           <div
+                    className="details-description"
+                    dangerouslySetInnerHTML={{
+                      __html: variable.Description,
+                    }}
+                  />
+          </div>
         </div>
       </div>
     </>
