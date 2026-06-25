@@ -9,7 +9,6 @@ type AsideProps = {
 };
 
 function Aside({ history, setHistory, onDecode }: AsideProps) {
-
   return (
     <>
       <DecoderInput setHistory={setHistory} onDecode={onDecode} />

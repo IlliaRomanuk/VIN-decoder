@@ -22,12 +22,14 @@ function Results({ data, message }: Props) {
         </thead>
 
         <tbody>
-          {data.map((item) => (
-            <tr key={item.VariableId}>
-              <td>{item.Variable}</td>
-              <td>{item.Value}</td>
-            </tr>
-          ))}
+          {data
+            .filter((item) => item.Value !== "" && item.Value !== null)
+            .map((item) => (
+              <tr key={item.VariableId}>
+                <td>{item.Variable}</td>
+                <td>{item.Value}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

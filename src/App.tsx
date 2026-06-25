@@ -9,9 +9,9 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-      <Route path="/" element={<Home />} />
-      <Route path="/variables" element={<Variables />} />
-      <Route path="/variables/:id" element={<VaribleDetails />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/variables" element={<Variables />} />
+        <Route path="/variables/:id" element={<VaribleDetails />} />
       </Route>
     </Routes>
   );

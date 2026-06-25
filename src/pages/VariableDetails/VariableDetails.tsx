@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getvehiclevariablelist } from "../../services/api";
+import { getVehiclevariablelist } from "../../services/api";
 import type { Variable } from "../../type/variable.type";
 import "./VariableDetails.css";
 function VariableDetails() {
@@ -8,7 +8,7 @@ function VariableDetails() {
   const [variable, setVariable] = useState<Variable | null>(null);
 
   useEffect(() => {
-    getvehiclevariablelist().then((data) => {
+    getVehiclevariablelist().then((data) => {
       const found = data.Results.find((item: Variable) => item.ID === Number(id));
       setVariable(found || null);
     });
@@ -25,12 +25,12 @@ function VariableDetails() {
             <span className="details-id">ID: {variable.ID}</span>
           </div>
           <div className="details-description">
-           <div
-                    className="details-description"
-                    dangerouslySetInnerHTML={{
-                      __html: variable.Description,
-                    }}
-                  />
+            <div
+              className="details-description"
+              dangerouslySetInnerHTML={{
+                __html: variable.Description,
+              }}
+            />
           </div>
         </div>
       </div>

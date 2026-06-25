@@ -1,4 +1,4 @@
-import { getvehiclevariablelist } from "../../services/api";
+import { getVehiclevariablelist } from "../../services/api";
 import { Link } from "react-router-dom";
 import "./Varibles.css";
 import { useQuery } from "@tanstack/react-query";
@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 function Variables() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["variables"],
-    queryFn: getvehiclevariablelist,
+    queryFn: getVehiclevariablelist,
   });
 
   if (isLoading) return <p>Loading variables</p>;

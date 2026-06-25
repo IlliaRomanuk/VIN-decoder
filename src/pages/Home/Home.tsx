@@ -16,16 +16,16 @@ function Home() {
   const { decode, data } = useDecodeVin();
   const [apiMessage, setApiMessage] = useState("");
 
-const handleDecode = async (vin: string) => {
-  const response = await decode(vin);
+  const handleDecode = async (vin: string) => {
+    const response = await decode(vin);
 
-  setApiMessage(response.Message);
+    setApiMessage(response.Message);
 
-  setHistory((prev) => {
-    const unique = prev.filter((v) => v !== vin);
-    return [vin, ...unique].slice(0, 3);
-  });
-};
+    setHistory((prev) => {
+      const unique = prev.filter((v) => v !== vin);
+      return [vin, ...unique].slice(0, 3);
+    });
+  };
 
   useEffect(() => {
     localStorage.setItem("history", JSON.stringify(history));
