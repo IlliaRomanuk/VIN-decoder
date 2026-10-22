@@ -1,0 +1,36 @@
+.variables-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.variable-item {
+  padding: 14px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+  transition: border-color 0.2s;
+}
+
+.variable-item:hover {
+  border-color: var(--accent);
+}
+
+.variable-item h2 {
+  margin-bottom: 4px;
+  font-size: 18px;
+}
+
+.variable-item h2 a {
+  color: var(--accent-text);
+}
+
+.variable-item h2 a:hover {
+  text-decoration: underline;
+}
+
+.variable-id {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
