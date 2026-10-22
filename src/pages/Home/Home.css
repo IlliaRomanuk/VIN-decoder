@@ -1,0 +1,12 @@
+.home-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  align-items: start;
+  gap: 25px;
+}
+
+@media (max-width: 768px) {
+  .home-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
