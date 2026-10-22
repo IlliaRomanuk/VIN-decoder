@@ -1,0 +1,53 @@
+.site-header {
+  min-height: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 12px max(40px, calc((100% - 1300px) / 2 + 20px));
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.site-header nav ul {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.site-header nav a {
+  font-weight: 500;
+}
+
+.site-header nav a:hover,
+.site-header nav a.active {
+  color: var(--accent-text);
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    padding: 10px 16px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .site-header nav ul {
+    gap: 16px;
+  }
+}
